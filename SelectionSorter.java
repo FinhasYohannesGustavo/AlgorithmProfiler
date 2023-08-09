@@ -1,13 +1,14 @@
-import java.sql.Time;
+//import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SelectionSorter{
     //Field for holding the data set to be sorted.
-    ArrayList<double> dataSet;
+    ArrayList<Double> dataSet;
     //Variable for holding how long the sorting took.
     long time_taken;
 
-    public SelectionSorter(ArrayList<double> dataSet){
+    public SelectionSorter(ArrayList<Double> dataSet){
         this.dataSet = dataSet;
     }
 
@@ -18,25 +19,20 @@ public class SelectionSorter{
         int len = dataSet.size();
         //Variable for holding the index of the current minimum portion.
         int index_of_min = 0;
-        //Variable for preserving one of the values to be switched.
-        int temp;
 
         for (int i=0; i<len-1; i++){
             index_of_min = i;
 
             //Look for the index of the minimum number in the unsorted part of the data set.
             for (int j=i+1; j<len; j++){
-                if(dataSet[j] < dataSet[index_of_min]){
+                if(dataSet.get(j) < dataSet.get(index_of_min)){
                     index_of_min = j;
                 }
             }
 
             //Only switch if the minimum index has changed.
-            if(index_of_min != i){
-                temp = dataSet[i];
-                dataSet[i] = dataSet[index_of_min];
-                dataSet[index_of_min] = temp;
-            }
+            if(index_of_min != i)
+                Collections.swap(dataSet, i, index_of_min);
 
         }
 
@@ -54,25 +50,20 @@ public class SelectionSorter{
         int len = dataSet.size();
         //Variable for holding the index of the current minimum portion.
         int index_of_max = 0;
-        //Variable for preserving one of the values to be switched.
-        int temp;
 
         for (int i=0; i<len-1; i++){
             index_of_max = i;
 
             //Look for the index of the minimum number in the unsorted part of the data set.
             for (int j=i+1; j<len; j++){
-                if(dataSet[j] > dataSet[index_of_max]){
+                if(dataSet.get(j) > dataSet.get(index_of_max)){
                     index_of_max = j;
                 }
             }
 
             //Only switch if the minimum index has changed.
-            if(index_of_max != i){
-                temp = dataSet[i];
-                dataSet[i] = dataSet[index_of_max];
-                dataSet[index_of_max] = temp;
-            }
+            if(index_of_max != i)
+                Collections.swap(dataSet, i, index_of_max);
 
         }
 
