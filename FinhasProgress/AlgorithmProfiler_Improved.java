@@ -27,7 +27,7 @@ public class AlgorithmProfiler_Improved{
         //InsertionSorter insertionSorter;
 
         ArrayList<Double> dataSet;
-        for(int i=1; i<30; i+=2){
+        for(int i=1; i<1000; i+=50){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
@@ -108,7 +108,9 @@ public class AlgorithmProfiler_Improved{
         
         //Add as many random numbers to the list as is specified by 'quantity'
         for(int i=0; i<quantity; i++){
-            to_be_returned.add(random_number.nextDouble());
+            
+            to_be_returned.add(random_number.nextInt(1000)+0.0);
+            //to_be_returned.add(random_number.nextDouble(1000));
         }
 
         return to_be_returned;
