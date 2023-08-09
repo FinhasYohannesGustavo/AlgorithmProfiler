@@ -27,7 +27,7 @@ public class AlgorithmProfiler_Improved{
         //InsertionSorter insertionSorter;
 
         ArrayList<Double> dataSet;
-        for(int i=1; i<20; i+=2){
+        for(int i=1; i<30; i+=2){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
@@ -36,29 +36,26 @@ public class AlgorithmProfiler_Improved{
             //---------------------------------------------------------------
             //Code for testing the selection sort algorithm in SelectionSorter
             //---------------------------------------------------------------
-            {
-                selectionSorter = new SelectionSorter(dataSet);
-                
-                //On Best case -> on an already sorted array.
-                selectionSorter.sortAscending();
-                ArrayList<Double> alreadySorted = selectionSorter.dataSet;
-                selectionSorter = new SelectionSorter(alreadySorted);
-                selectionSorter.sortAscending();
-                selection_size_duration_map_best.put(i, selectionSorter.time_taken);
-                
-                //On Average case
-                selectionSorter = new SelectionSorter(dataSet);
-                selectionSorter.sortAscending();
-                selection_size_duration_map_average.put(i, selectionSorter.time_taken);
+            selectionSorter = new SelectionSorter(dataSet);
+            
+            //On Best case -> on an already sorted array.
+            selectionSorter.sortAscending();
+            ArrayList<Double> alreadySorted = selectionSorter.dataSet;
+            selectionSorter = new SelectionSorter(alreadySorted);
+            selectionSorter.sortAscending();
+            selection_size_duration_map_best.put(i, selectionSorter.time_taken);
+            
+            //On Average case
+            selectionSorter = new SelectionSorter(dataSet);
+            selectionSorter.sortAscending();
+            selection_size_duration_map_average.put(i, selectionSorter.time_taken);
 
-                //On Worst case
-                selectionSorter.sortDescending();
-                ArrayList<Double> reversed = selectionSorter.dataSet;
-                selectionSorter = new SelectionSorter(reversed);
-                selectionSorter.sortAscending();
-                selection_size_duration_map_worst.put(i, selectionSorter.time_taken);
-
-            }
+            //On Worst case
+            selectionSorter.sortDescending();
+            ArrayList<Double> reversed = selectionSorter.dataSet;
+            selectionSorter = new SelectionSorter(reversed);
+            selectionSorter.sortAscending();
+            selection_size_duration_map_worst.put(i, selectionSorter.time_taken);
 
             //---------------------------------------------------------------
             //Code for testing the selection sort algorithm in BubbleSorter
@@ -78,7 +75,7 @@ public class AlgorithmProfiler_Improved{
         //Code for displaying the results of selection sort algorithm
         //---------------------------------------------------------------
         {
-            System.out.println("\n\nRESULTS ON THE SELECTION SORT ALGORITHM:\n\n");
+            System.out.println("\n\nRESULTS ON THE SELECTION SORT ALGORITHM:");
             
             //On best case
             System.out.println("\nFor best case:");
