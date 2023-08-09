@@ -1,0 +1,16 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/hamcrest-core-1.3.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/jcommon-1.0.23.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/jfreechart-1.0.19-experimental.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/jfreechart-1.0.19-swt.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/jfreesvg-2.0.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/junit-4.11.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/orsoncharts-1.4-eval-nofx.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/orsonpdf-1.6-eval.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/servlet.jar",
+        "FinhasProgress/lib/jfreechart-1.0.19/lib/swtgraphics2d.jar"
+    ]
+}

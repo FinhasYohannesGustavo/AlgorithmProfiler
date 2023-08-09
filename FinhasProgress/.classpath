@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="FinhasProgress\src"/>
+  <classpathentry kind="lib" path="FinhasProgress\lib\jfreechart-1.0.19\lib\jfreechart-1.0.19.jar"/>
+  <!-- Additional classpath entries can be added here -->
+  <classpathentry kind="output" path="bin"/>
+</classpath>
