@@ -1,7 +1,8 @@
-package FinhasProgress;
+package FinhasProgress.src;
 //Standard libraries
 //import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,34 +27,34 @@ public class AlgorithmProfiler_Improved{
         //BubbleSorter bubbleSorter;
         //InsertionSorter insertionSorter;
 
-        ArrayList<Double> dataSet;
-        for(int i=1; i<1000; i+=50){
+        ArrayList<Integer> dataSetRandom;
+        ArrayList<Integer> dataSet;
+
+        for(int i=10; i<=10000; i*=10){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
-            dataSet = AlgorithmProfiler_Improved.dataSetGenerator(i);
+            dataSetRandom = AlgorithmProfiler_Improved.dataSetGenerator(i);
+            dataSet = dataSetRandom;
 
             //---------------------------------------------------------------
             //Code for testing the selection sort algorithm in SelectionSorter
             //---------------------------------------------------------------
-            selectionSorter = new SelectionSorter(dataSet);
+            
+            //On Average case
+            selectionSorter = new SelectionSorter(dataSetRandom);
+            selectionSorter.sortAscending();
+            selection_size_duration_map_average.put(i, selectionSorter.time_taken);
             
             //On Best case -> on an already sorted array.
-            selectionSorter.sortAscending();
-            ArrayList<Double> alreadySorted = selectionSorter.dataSet;
-            selectionSorter = new SelectionSorter(alreadySorted);
+            Collections.sort(dataSet);
+            selectionSorter = new SelectionSorter(dataSet);
             selectionSorter.sortAscending();
             selection_size_duration_map_best.put(i, selectionSorter.time_taken);
             
-            //On Average case
-            selectionSorter = new SelectionSorter(dataSet);
-            selectionSorter.sortAscending();
-            selection_size_duration_map_average.put(i, selectionSorter.time_taken);
-
             //On Worst case
-            selectionSorter.sortDescending();
-            ArrayList<Double> reversed = selectionSorter.dataSet;
-            selectionSorter = new SelectionSorter(reversed);
+            Collections.sort(dataSet, Collections.reverseOrder());
+            selectionSorter = new SelectionSorter(dataSet);
             selectionSorter.sortAscending();
             selection_size_duration_map_worst.put(i, selectionSorter.time_taken);
 
@@ -99,9 +100,9 @@ public class AlgorithmProfiler_Improved{
     }
 
     //A function that generates as many random numbers as needed.
-    public static ArrayList<Double> dataSetGenerator(int quantity){
+    public static ArrayList<Integer> dataSetGenerator(int quantity){
         //Array list that will contain all the random numbers
-        ArrayList<Double> to_be_returned = new ArrayList<Double>();
+        ArrayList<Integer> to_be_returned = new ArrayList<Integer>();
         
         //Random number object for generating random numbers
         Random random_number = new Random();
@@ -109,8 +110,8 @@ public class AlgorithmProfiler_Improved{
         //Add as many random numbers to the list as is specified by 'quantity'
         for(int i=0; i<quantity; i++){
             
-            to_be_returned.add(random_number.nextInt(1000)+0.0);
-            //to_be_returned.add(random_number.nextDouble(1000));
+            to_be_returned.add(random_number.nextInt(1000));
+            //to_be_returned.add(random_number.nextInteger(1000));
         }
 
         return to_be_returned;
@@ -127,7 +128,7 @@ public class AlgorithmProfiler_Improved{
         }
     }
 
-    public static String printDataSet(ArrayList<Double> dataSet){
+    public static String printDataSet(ArrayList<Integer> dataSet){
         String to_be_printed = "{";
         int len = dataSet.size();
         for(int i=0; i<len; i++){
