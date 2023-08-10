@@ -57,9 +57,9 @@ public class SelectionSorter{
         //Calculate the duration and set it to time_taken.
         time_taken = (end_time - start_time)/1000;
 
-        // System.out.println("Number of swaps: " + num_of_swaps);
-        // System.out.println("Number of checks: " + num_of_checks);
-        // System.out.println("Time taken: " + time_taken);
+        System.out.println("Number of swaps: " + num_of_swaps);
+        System.out.println("Number of checks: " + num_of_checks);
+        System.out.println("Time taken: " + time_taken);
 
     }
 
@@ -90,14 +90,12 @@ public class SelectionSorter{
         //Variable for holding the end time.
         long end_time = System.nanoTime();
         //Calculate the duration and set it to time_taken.
-        time_taken = end_time - start_time;
-
-        time_taken = time_taken / 1000000;
+        time_taken = (end_time - start_time)/1000;
 
     }
 
     public static void main(String...str) {
-        ArrayList<Integer> dataSet = AlgorithmProfiler_Improved.dataSetGenerator(100000);
+        ArrayList<Integer> dataSet = AlgorithmProfiler_Improved.dataSetGenerator(1000);
         SelectionSorter selectionSorter = new SelectionSorter(dataSet);
 
         // dataSet = AlgorithmProfiler_Improved.dataSetGenerator(10);
@@ -107,14 +105,13 @@ public class SelectionSorter{
         //---------------------------------------------------------------
         selectionSorter = new SelectionSorter(dataSet);
         
+        //On Average case
         System.out.println("==============================");
         System.out.println("| AVERAGE CASE SCENARIO TEST |");
         System.out.println("==============================");
-        //On Average case
         selectionSorter.sortAscending();
         
         //On Best case -> on an already sorted array.
-        // selectionSorter.sortAscending();
         ArrayList<Integer> alreadySorted = selectionSorter.dataSet;
         selectionSorter = new SelectionSorter(alreadySorted);
         System.out.println("===========================");
