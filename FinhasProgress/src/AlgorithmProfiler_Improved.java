@@ -17,19 +17,17 @@ public class AlgorithmProfiler_Improved{
         // Hash maps to hold the problem size vs time duration for the three cases in the bubble sort algorithm.
 
         // Hash maps to hold the problem size vs time duration for the three cases in the insertion sort algorithm.
-        HashMap<Integer, Long> insertion_size_duration_map_best = new HashMap<>();
-        HashMap<Integer, Long> insertion_size_duration_map_average = new HashMap<>();
-        HashMap<Integer, Long> insertion_size_duration_map_worst = new HashMap<>();
+
         //===============================================================
         //CODE FOR TESTING OUT THE ALGORITHMS
         //===============================================================
         
         SelectionSorter selectionSorter;
         //BubbleSorter bubbleSorter;
-        InsertionSorter insertionSorter;
+        //InsertionSorter insertionSorter;
 
         ArrayList<Integer> dataSet;
-        for(int i=1; i<30; i+=2){
+        for(int i=1; i<1000; i+=50){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
@@ -65,28 +63,9 @@ public class AlgorithmProfiler_Improved{
            
             
             //---------------------------------------------------------------
-            //Code for testing the insertion sort algorithm in InsertionSorter
+            //Code for testing the selection sort algorithm in InsertionSorter
             //---------------------------------------------------------------
-            insertionSorter = new InsertionSorter(dataSet);
             
-            //On Best case -> on an already sorted array.
-            insertionSorter.sortAscending();
-            ArrayList<Integer> alreadySortedInsertion = insertionSorter.dataSet;
-            insertionSorter = new InsertionSorter(alreadySortedInsertion);
-            insertionSorter.sortAscending();
-            insertion_size_duration_map_best.put(i, insertionSorter.time_taken);
-            
-            //On Average case
-            insertionSorter = new InsertionSorter(dataSet);
-            insertionSorter.sortAscending();
-            insertion_size_duration_map_average.put(i, insertionSorter.time_taken);
-
-            //On Worst case
-            insertionSorter.sortDescending();
-            ArrayList<Integer> reversedInsertion = insertionSorter.dataSet;
-            insertionSorter = new InsertionSorter(reversedInsertion);
-            insertionSorter.sortAscending();
-            insertion_size_duration_map_worst.put(i, insertionSorter.time_taken);
         }
 
         //===============================================================
@@ -117,21 +96,6 @@ public class AlgorithmProfiler_Improved{
         //---------------------------------------------------------------
         //Code for displaying the results of insertion sort algorithm
         //---------------------------------------------------------------
-
-        {
-            
-            System.out.println("\n\nRESULTS ON THE Insertion SORT ALGORITHM:");
-            
-            //On best case
-            System.out.println("\nFor best case:");
-            printHashMap(insertion_size_duration_map_best);
-            //On average case
-            System.out.println("\nFor average case:");
-            printHashMap(insertion_size_duration_map_average);
-            //On worst case
-            System.out.println("\nFor worst case:");
-            printHashMap(insertion_size_duration_map_worst);
-        }
     }
 
     //A function that generates as many random numbers as needed.
@@ -144,7 +108,9 @@ public class AlgorithmProfiler_Improved{
         
         //Add as many random numbers to the list as is specified by 'quantity'
         for(int i=0; i<quantity; i++){
-            to_be_returned.add(random_number.nextInt());
+            
+            to_be_returned.add(random_number.nextInt(1000));
+            //to_be_returned.add(random_number.nextInteger(1000));
         }
 
         return to_be_returned;
