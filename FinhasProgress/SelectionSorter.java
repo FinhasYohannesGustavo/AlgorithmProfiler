@@ -107,7 +107,7 @@ public class SelectionSorter{
         System.out.println("==============================");
         //On Average case
         selectionSorter = new SelectionSorter(dataSetX);
-        selectionSorter.sortAscending();
+        // selectionSorter.sortAscending();
         
         //On Best case -> on an already sorted array.
         selectionSorter.sortAscending();

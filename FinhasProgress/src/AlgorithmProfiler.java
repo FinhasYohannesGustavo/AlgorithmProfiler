@@ -84,7 +84,7 @@ public class AlgorithmProfiler{
 
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Growth Rate of insertion sort",
-                "Datasets(Each iteration with a 100 more elements than the last)",
+                "Datasets(Each iteration with a 1000 more elements than the last)",
                 "Time in ms",
                 dataset,
                 PlotOrientation.VERTICAL,
