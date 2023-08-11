@@ -81,9 +81,10 @@ public class AlgorithmProfiler_Improved{
             insertion_size_duration_map_average.put(i, insertionSorter.time_taken); 
 
             //On Worst case
-            insertionSorter.sortDescending();
-            ArrayList<Integer> reversedInsertion = insertionSorter.dataSet;
-            insertionSorter = new InsertionSorter(reversedInsertion);
+           
+            
+            Collections.sort(dataSet, Collections.reverseOrder());
+            insertionSorter = new InsertionSorter(dataSet);
             insertionSorter.sortAscending();
             insertion_size_duration_map_worst.put(i, insertionSorter.time_taken); 
         }
@@ -141,8 +142,8 @@ public class AlgorithmProfiler_Improved{
             int data_size = record.getKey();
             long time_taken = record.getValue();
 
-            //System.out.printf("[%d, %d] \n", data_size, time_taken);
-            System.out.println( time_taken);
+            System.out.printf("[%d, %d] \n", data_size, time_taken);
+            
         }
     }
 
