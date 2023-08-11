@@ -37,7 +37,7 @@ public class AlgorithmProfiler_Improved{
         InsertionSorter insertionSorter;
 
         ArrayList<Integer> dataSet;
-        for(int i=10; i<400; i+=10){
+        for(int i=1000; i<=40000; i+=1000){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
