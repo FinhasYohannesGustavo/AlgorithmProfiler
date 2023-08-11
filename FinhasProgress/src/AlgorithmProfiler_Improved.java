@@ -28,12 +28,12 @@ public class AlgorithmProfiler_Improved{
         //BubbleSorter bubbleSorter;
         InsertionSorter insertionSorter;
 
-        ArrayList<Integer> dataSet;
-        for(int i=1; i<30; i+=2){
+        //ArrayList<Integer> dataSet;
+        for(int i=1; i<41; i++){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
-            dataSet = AlgorithmProfiler_Improved.dataSetGenerator(i);
+            ArrayList<Integer> dataSet = AlgorithmProfiler_Improved.dataSetGenerator(i*1000);
 
             //---------------------------------------------------------------
             //Code for testing the selection sort algorithm in SelectionSorter
@@ -58,9 +58,9 @@ public class AlgorithmProfiler_Improved{
             selectionSorter = new SelectionSorter(reversed);
             selectionSorter.sortAscending();
             selection_size_duration_map_worst.put(i, selectionSorter.time_taken);
-
+ 
             //---------------------------------------------------------------
-            //Code for testing the selection sort algorithm in BubbleSorter
+            //Code for testing the bubble sort algorithm in BubbleSorter
             //---------------------------------------------------------------
            
             
@@ -74,19 +74,19 @@ public class AlgorithmProfiler_Improved{
             ArrayList<Integer> alreadySortedInsertion = insertionSorter.dataSet;
             insertionSorter = new InsertionSorter(alreadySortedInsertion);
             insertionSorter.sortAscending();
-            insertion_size_duration_map_best.put(i, insertionSorter.time_taken);
+            insertion_size_duration_map_best.put(i, insertionSorter.time_taken); 
             
             //On Average case
             insertionSorter = new InsertionSorter(dataSet);
             insertionSorter.sortAscending();
-            insertion_size_duration_map_average.put(i, insertionSorter.time_taken);
+            insertion_size_duration_map_average.put(i, insertionSorter.time_taken); 
 
             //On Worst case
             insertionSorter.sortDescending();
             ArrayList<Integer> reversedInsertion = insertionSorter.dataSet;
             insertionSorter = new InsertionSorter(reversedInsertion);
             insertionSorter.sortAscending();
-            insertion_size_duration_map_worst.put(i, insertionSorter.time_taken);
+            insertion_size_duration_map_worst.put(i, insertionSorter.time_taken); 
         }
 
         //===============================================================
@@ -95,7 +95,7 @@ public class AlgorithmProfiler_Improved{
         //---------------------------------------------------------------
         //Code for displaying the results of selection sort algorithm
         //---------------------------------------------------------------
-        {
+         {
             System.out.println("\n\nRESULTS ON THE SELECTION SORT ALGORITHM:");
             
             //On best case
@@ -108,7 +108,7 @@ public class AlgorithmProfiler_Improved{
             System.out.println("\nFor worst case:");
             printHashMap(selection_size_duration_map_worst);
 
-        }
+        } 
         //---------------------------------------------------------------
         //Code for displaying the results of bubble sort algorithm
         //---------------------------------------------------------------
@@ -144,20 +144,21 @@ public class AlgorithmProfiler_Improved{
         
         //Add as many random numbers to the list as is specified by 'quantity'
         for(int i=0; i<quantity; i++){
-            to_be_returned.add(random_number.nextInt());
+            to_be_returned.add(random_number.nextInt(1000,100000));
         }
 
         return to_be_returned;
     }
 
     public static void printHashMap(HashMap<Integer, Long> table){
-        System.out.println("[Data size, Time taken]");
+        System.out.println("[Data size, Time taken in microseconds]");
 
         for(Map.Entry<Integer, Long> record : table.entrySet()){
             int data_size = record.getKey();
             long time_taken = record.getValue();
 
-            System.out.printf("[%d, %d] \n", data_size, time_taken);
+            //System.out.printf("[%d, %d] \n", data_size, time_taken);
+            System.out.println( time_taken);
         }
     }
 

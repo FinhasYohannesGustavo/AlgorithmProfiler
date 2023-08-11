@@ -40,7 +40,7 @@ public class SelectionSorter{
         //Variable for holding the end time.
         long end_time = System.nanoTime();
         //Calculate the duration and set it to time_taken.
-        time_taken = end_time - start_time;
+        time_taken = (end_time - start_time)/1000; //Time taken will be in microseconds
 
     }
 
@@ -71,7 +71,7 @@ public class SelectionSorter{
         //Variable for holding the end time.
         long end_time = System.nanoTime();
         //Calculate the duration and set it to time_taken.
-        time_taken = end_time - start_time;
+        time_taken = (end_time - start_time)/1000;//time taken will be in microseconds
 
     }
 
