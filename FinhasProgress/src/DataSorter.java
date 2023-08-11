@@ -15,13 +15,13 @@ public class DataSorter {
     }
 
     public void selectionSort(){
+        //Variable for holding the start time.
+        long start_time = System.nanoTime();
+        
         //Variable for holding the size of the array list.
         int len = dataSet.size();
         //Variable for holding the index of the current minimum portion.
         int index_of_min = 0;
-        
-        //Variable for holding the start time.
-        long start_time = System.nanoTime();
 
         for (int i=0; i<len-1; i++){
             index_of_min = i;
@@ -47,9 +47,9 @@ public class DataSorter {
     }
 
     public void bubbleSort(){
+        long start_time = System.nanoTime();
         boolean swapped = true;
         int size = dataSet.size();
-        long start_time = System.nanoTime();
         int temp = 0;
 
         for (int i = 0; i < size - 1 && swapped; i++) {
