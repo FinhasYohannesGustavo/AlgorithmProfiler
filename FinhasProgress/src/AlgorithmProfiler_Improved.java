@@ -2,6 +2,7 @@ package FinhasProgress.src;
 //Standard libraries
 //import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,9 +18,10 @@ public class AlgorithmProfiler_Improved{
         // Hash maps to hold the problem size vs time duration for the three cases in the bubble sort algorithm.
 
         // Hash maps to hold the problem size vs time duration for the three cases in the insertion sort algorithm.
-        HashMap<Integer, Long> insertion_size_duration_map_best = new HashMap<>();
+         HashMap<Integer, Long> insertion_size_duration_map_best = new HashMap<>();
         HashMap<Integer, Long> insertion_size_duration_map_average = new HashMap<>();
         HashMap<Integer, Long> insertion_size_duration_map_worst = new HashMap<>();
+
         //===============================================================
         //CODE FOR TESTING OUT THE ALGORITHMS
         //===============================================================
@@ -38,24 +40,21 @@ public class AlgorithmProfiler_Improved{
             //---------------------------------------------------------------
             //Code for testing the selection sort algorithm in SelectionSorter
             //---------------------------------------------------------------
-            selectionSorter = new SelectionSorter(dataSet);
-            
-            //On Best case -> on an already sorted array.
-            selectionSorter.sortAscending();
-            ArrayList<Integer> alreadySorted = selectionSorter.dataSet;
-            selectionSorter = new SelectionSorter(alreadySorted);
-            selectionSorter.sortAscending();
-            selection_size_duration_map_best.put(i, selectionSorter.time_taken);
             
             //On Average case
             selectionSorter = new SelectionSorter(dataSet);
             selectionSorter.sortAscending();
             selection_size_duration_map_average.put(i, selectionSorter.time_taken);
-
+            
+            //On Best case -> on an already sorted array.
+            Collections.sort(dataSet);
+            selectionSorter = new SelectionSorter(dataSet);
+            selectionSorter.sortAscending();
+            selection_size_duration_map_best.put(i, selectionSorter.time_taken);
+            
             //On Worst case
-            selectionSorter.sortDescending();
-            ArrayList<Integer> reversed = selectionSorter.dataSet;
-            selectionSorter = new SelectionSorter(reversed);
+            Collections.sort(dataSet, Collections.reverseOrder());
+            selectionSorter = new SelectionSorter(dataSet);
             selectionSorter.sortAscending();
             selection_size_duration_map_worst.put(i, selectionSorter.time_taken);
  
@@ -65,7 +64,7 @@ public class AlgorithmProfiler_Improved{
            
             
             //---------------------------------------------------------------
-            //Code for testing the insertion sort algorithm in InsertionSorter
+            //Code for testing the selection sort algorithm in InsertionSorter
             //---------------------------------------------------------------
             insertionSorter = new InsertionSorter(dataSet);
             
@@ -117,21 +116,6 @@ public class AlgorithmProfiler_Improved{
         //---------------------------------------------------------------
         //Code for displaying the results of insertion sort algorithm
         //---------------------------------------------------------------
-
-        {
-            
-            System.out.println("\n\nRESULTS ON THE Insertion SORT ALGORITHM:");
-            
-            //On best case
-            System.out.println("\nFor best case:");
-            printHashMap(insertion_size_duration_map_best);
-            //On average case
-            System.out.println("\nFor average case:");
-            printHashMap(insertion_size_duration_map_average);
-            //On worst case
-            System.out.println("\nFor worst case:");
-            printHashMap(insertion_size_duration_map_worst);
-        }
     }
 
     //A function that generates as many random numbers as needed.
