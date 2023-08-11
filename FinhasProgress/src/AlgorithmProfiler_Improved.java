@@ -2,6 +2,7 @@ package FinhasProgress.src;
 //Standard libraries
 //import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,34 +27,34 @@ public class AlgorithmProfiler_Improved{
         //BubbleSorter bubbleSorter;
         //InsertionSorter insertionSorter;
 
+        ArrayList<Integer> dataSetRandom;
         ArrayList<Integer> dataSet;
-        for(int i=1; i<1000; i+=50){
+
+        for(int i=10; i<=10000; i*=10){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
-            dataSet = AlgorithmProfiler_Improved.dataSetGenerator(i);
+            dataSetRandom = AlgorithmProfiler_Improved.dataSetGenerator(i);
+            dataSet = dataSetRandom;
 
             //---------------------------------------------------------------
             //Code for testing the selection sort algorithm in SelectionSorter
             //---------------------------------------------------------------
-            selectionSorter = new SelectionSorter(dataSet);
+            
+            //On Average case
+            selectionSorter = new SelectionSorter(dataSetRandom);
+            selectionSorter.sortAscending();
+            selection_size_duration_map_average.put(i, selectionSorter.time_taken);
             
             //On Best case -> on an already sorted array.
-            selectionSorter.sortAscending();
-            ArrayList<Integer> alreadySorted = selectionSorter.dataSet;
-            selectionSorter = new SelectionSorter(alreadySorted);
+            Collections.sort(dataSet);
+            selectionSorter = new SelectionSorter(dataSet);
             selectionSorter.sortAscending();
             selection_size_duration_map_best.put(i, selectionSorter.time_taken);
             
-            //On Average case
-            selectionSorter = new SelectionSorter(dataSet);
-            selectionSorter.sortAscending();
-            selection_size_duration_map_average.put(i, selectionSorter.time_taken);
-
             //On Worst case
-            selectionSorter.sortDescending();
-            ArrayList<Integer> reversed = selectionSorter.dataSet;
-            selectionSorter = new SelectionSorter(reversed);
+            Collections.sort(dataSet, Collections.reverseOrder());
+            selectionSorter = new SelectionSorter(dataSet);
             selectionSorter.sortAscending();
             selection_size_duration_map_worst.put(i, selectionSorter.time_taken);
 
