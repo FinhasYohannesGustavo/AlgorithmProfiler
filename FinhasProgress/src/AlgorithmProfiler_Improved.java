@@ -31,85 +31,88 @@ public class AlgorithmProfiler_Improved{
         HashMap<Integer, Long> insertion_size_duration_map_average = new HashMap<>();
         HashMap<Integer, Long> insertion_size_duration_map_worst = new HashMap<>();
         
-        // Variables for accessing the specific sorting algorithm type.
-        SelectionSorter selectionSorter;
-        BubbleSorter bubbleSorter;
-        InsertionSorter insertionSorter;
+        // Object for accessing all the sorting algorithms.
+        DataSorter dataSorter;
 
+        // Array list for holding the  radomly jumbled list of numbers.
+        ArrayList<Integer> dataSetRandom;
+        // Array list that will be modified for each case.
         ArrayList<Integer> dataSet;
+
         for(int i=1000; i<=40000; i+=1000){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
-            dataSet = AlgorithmProfiler_Improved.dataSetGenerator(i);
+            dataSetRandom = AlgorithmProfiler_Improved.dataSetGenerator(i);
+            dataSet = dataSetRandom;
 
             //---------------------------------------------------------------
-            //Code for testing the selection sort algorithm in SelectionSorter
+            //Code for testing the | selection | sort algorithm in DataSorter
             //---------------------------------------------------------------
             {
-                selectionSorter = new SelectionSorter(dataSet);
+                dataSorter = new DataSorter(dataSetRandom);
                 
                 //On Average case -> jumbled data set.
-                selectionSorter.sortAscending();
-                selection_size_duration_map_average.put(i, selectionSorter.time_taken); 
+                dataSorter.selectionSort();
+                selection_size_duration_map_average.put(i, dataSorter.time_taken); 
                 
                 //On Best case -> on an already sorted data set.
                 Collections.sort(dataSet);
-                selectionSorter.dataSet = dataSet;
-                selectionSorter.sortAscending();
-                selection_size_duration_map_best.put(i, selectionSorter.time_taken); 
+                dataSorter.dataSet = dataSet;
+                dataSorter.selectionSort();
+                selection_size_duration_map_best.put(i, dataSorter.time_taken); 
     
                 //On Worst case -> reverese-sorted data set.
                 Collections.sort(dataSet, Collections.reverseOrder());
-                selectionSorter.dataSet = dataSet;
-                selectionSorter.sortAscending();
-                selection_size_duration_map_worst.put(i, selectionSorter.time_taken); 
+                dataSorter.dataSet = dataSet;
+                dataSorter.selectionSort();
+                selection_size_duration_map_worst.put(i, dataSorter.time_taken); 
             }
             
             //---------------------------------------------------------------
-            //Code for testing the bubble sort algorithm in BubbleSorter
+            //Code for testing the | bubble | sort algorithm in DataSorter
             //---------------------------------------------------------------
             {
-                bubbleSorter = new BubbleSorter(dataSet);
+                dataSorter = new DataSorter(dataSetRandom);
                 
                 //On Average case -> jumbled data set.
-                bubbleSorter.sortAscending();
-                bubble_size_duration_map_average.put(i, bubbleSorter.time_taken); 
+                dataSorter.bubbleSort();
+                bubble_size_duration_map_average.put(i, dataSorter.time_taken); 
                 
                 //On Best case -> on an already sorted data set.
                 Collections.sort(dataSet);
-                bubbleSorter.dataSet = dataSet;
-                bubbleSorter.sortAscending();
-                bubble_size_duration_map_best.put(i, bubbleSorter.time_taken); 
+                dataSorter.dataSet = dataSet;
+                dataSorter.bubbleSort();
+                bubble_size_duration_map_best.put(i, dataSorter.time_taken); 
     
                 //On Worst case -> reverese-sorted data set.
                 Collections.sort(dataSet, Collections.reverseOrder());
-                bubbleSorter.dataSet = dataSet;
-                bubbleSorter.sortAscending();
-                bubble_size_duration_map_worst.put(i, bubbleSorter.time_taken); 
+                dataSorter.dataSet = dataSet;
+                dataSorter.bubbleSort();
+                bubble_size_duration_map_worst.put(i, dataSorter.time_taken); 
             }
            
             //---------------------------------------------------------------
-            //Code for testing the selection sort algorithm in InsertionSorter
+            //Code for testing the | insertion | sort algorithm in DataSorter
             //---------------------------------------------------------------
             {
-                insertionSorter = new InsertionSorter(dataSet);
+                dataSorter = new DataSorter(dataSetRandom);
                 
                 //On Average case -> jumbled data set.
-                insertionSorter.sortAscending();
-                insertion_size_duration_map_average.put(i, insertionSorter.time_taken); 
+                dataSorter.insertionSort();
+                insertion_size_duration_map_average.put(i, dataSorter.time_taken); 
                 
                 //On Best case -> on an already sorted data set.
                 Collections.sort(dataSet);
-                insertionSorter.dataSet = dataSet;
-                insertionSorter.sortAscending();
-                insertion_size_duration_map_best.put(i, insertionSorter.time_taken); 
+                dataSorter.dataSet = dataSet;
+                dataSorter.insertionSort();
+                insertion_size_duration_map_best.put(i, dataSorter.time_taken); 
     
                 //On Worst case -> reverese-sorted data set.
                 Collections.sort(dataSet, Collections.reverseOrder());
-                insertionSorter.dataSet = dataSet;
-                insertionSorter.sortAscending();
-                insertion_size_duration_map_worst.put(i, insertionSorter.time_taken); 
+                dataSorter.dataSet = dataSet;
+                dataSorter.insertionSort();
+                insertion_size_duration_map_worst.put(i, dataSorter.time_taken); 
             }
         }
 
@@ -199,7 +202,7 @@ public class AlgorithmProfiler_Improved{
             int data_size = record.getKey();
             long time_taken = record.getValue();
 
-            System.out.printf("[%d, %d] \n", data_size, time_taken);
+            System.out.printf("[%d, %d]\n", data_size, time_taken);
         }
     }
 
