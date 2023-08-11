@@ -108,11 +108,11 @@ public class SelectionSorter{
         SelectionSorter selectionSorter;
 
         //ArrayList<Integer> dataSet;
-        for(int i=1; i<41; i++){
+        for(int i=1000; i<41; i+=1000){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
-            ArrayList<Integer> dataSet = AlgorithmProfiler_Improved.dataSetGenerator(i*1000);
+            ArrayList<Integer> dataSet = AlgorithmProfiler_Improved.dataSetGenerator(i);
             
             selectionSorter = new SelectionSorter(dataSet);
             
