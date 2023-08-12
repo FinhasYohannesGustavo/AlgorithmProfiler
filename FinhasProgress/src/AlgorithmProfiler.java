@@ -1,110 +1,222 @@
-// package FinhasProgress.src;
-// import java.sql.Time;
-// import java.awt.Color;
-// import java.awt.Dimension;
-// import java.util.ArrayList;
-// import java.util.Arrays;
-// import java.util.Random;
+package FinhasProgress.src;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
-// import javax.swing.JFrame;
-// import javax.xml.crypto.Data;
+public class AlgorithmProfiler{
 
-// import org.jfree.chart.ChartFactory;
-// import org.jfree.chart.ChartPanel;
-// import org.jfree.chart.JFreeChart;
-// import org.jfree.chart.plot.PlotOrientation;
-// import org.jfree.data.xy.XYSeries;
-// import org.jfree.data.xy.XYSeriesCollection;
+    public static void main (String...str){
+        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        
+        //CODE FOR TESTING OUT THE ALGORITHMS
+        
+        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
+        // Hash maps to hold the problem size vs time duration mapping for the three cases in the selection sort algorithm.
+        HashMap<Integer, Long> selection_size_duration_map_best = new HashMap<>();
+        HashMap<Integer, Long> selection_size_duration_map_average = new HashMap<>();
+        HashMap<Integer, Long> selection_size_duration_map_worst = new HashMap<>();
+        
+        // Hash maps to hold the problem size vs time duration mapping for the three cases in the bubble sort algorithm.
+        HashMap<Integer, Long> bubble_size_duration_map_best = new HashMap<>();
+        HashMap<Integer, Long> bubble_size_duration_map_average = new HashMap<>();
+        HashMap<Integer, Long> bubble_size_duration_map_worst = new HashMap<>();
 
+        // Hash maps to hold the problem size vs time duration mapping for the three cases in the insertion sort algorithm.
+        HashMap<Integer, Long> insertion_size_duration_map_best = new HashMap<>();
+        HashMap<Integer, Long> insertion_size_duration_map_average = new HashMap<>();
+        HashMap<Integer, Long> insertion_size_duration_map_worst = new HashMap<>();
+        
+        // Object for accessing all the sorting algorithms.
+        DataSorter dataSorter;
 
-// public class AlgorithmProfiler{
+        // Array list for holding the  radomly jumbled list of numbers.
+        ArrayList<Integer> dataSetRandom;
+        // Array list that will be modified for each case.
+        ArrayList<Integer> dataSet;
 
+        for(int i=1000; i<=20000; i+=1000){
+
+            //Array list for holding the current randomly generated data set
+            //to compare the three algorithms with the same data set.
+            dataSetRandom = AlgorithmProfiler.dataSetGenerator(i);
+            dataSet = dataSetRandom;
+
+            //---------------------------------------------------------------
+            //Code for testing the | selection | sort algorithm in DataSorter
+            //---------------------------------------------------------------
+            {
+                dataSorter = new DataSorter(dataSetRandom);
+                
+                //On Average case -> jumbled data set.
+                dataSorter.selectionSort();
+                selection_size_duration_map_average.put(i, dataSorter.time_taken); 
+                
+                //On Best case -> on an already sorted data set.
+                Collections.sort(dataSet);
+                dataSorter.dataSet = dataSet;
+                dataSorter.selectionSort();
+                selection_size_duration_map_best.put(i, dataSorter.time_taken); 
     
-
-//     public static double ActualProfiler(ArrayList <Integer> DataSet){
-//         long startTime = System.nanoTime(); //we record the start time of when the sorting algorithm starts
-//         int size = DataSet.size();
-//         //This is the insertion sort algorithm
-//         for(int i = 1; i<size;i++){
+                //On Worst case -> reverese-sorted data set.
+                Collections.sort(dataSet, Collections.reverseOrder());
+                dataSorter.dataSet = dataSet;
+                dataSorter.selectionSort();
+                selection_size_duration_map_worst.put(i, dataSorter.time_taken); 
+            }
             
-//             int temp = DataSet.get(i);
-//             int j=i;
-//             while(j>0&&temp<DataSet.get(j-1)){
-//                 DataSet.set(j,DataSet.get(j-1)); //This sorting algorithm implements shifting not swapping
-//                 j--;
-
-//             }
-//             DataSet.set(j,temp);
+            //---------------------------------------------------------------
+            //Code for testing the | bubble | sort algorithm in DataSorter
+            //---------------------------------------------------------------
+            {
+                dataSorter = new DataSorter(dataSetRandom);
                 
+                //On Average case -> jumbled data set.
+                dataSorter.bubbleSort();
+                bubble_size_duration_map_average.put(i, dataSorter.time_taken); 
                 
-            
-//         }
-//       /*   for(int i=0;i<size;i++){
-//             System.out.print(DataSet.get(i)); was simply used to test out that the dataset has actually been sorted
-//             System.out.print(",");
-//         } */
-//         long endTime = System.nanoTime(); //we record the system time in nano seconds after the algorithm sorts the data set
-//         long timeInNanoSeconds= (endTime-startTime);//We subtract the two times to get duration
-//         return timeInNanoSeconds/1000000;//we return the duration in milliseconds
-
-//     }
-//     public static void main(String [] args){
-        
-
-//         Random random = new Random();
-//         int size_of_rand = 10;
-//         String[] labels = new String[100];//we will use this data array as labels on x axis
-//         ArrayList <Double> values = new ArrayList<Double>();//these are the values we will use for the chart
-//         for (int i = 0; i < 100; i++) {
-//             labels[i] = "d" + (i + 1);
-//         }
-//         for (int i = 1; i <= 100; i++) {
-//             size_of_rand+=1000;//this will increase the size of each next dat set by a 1000
-//             ArrayList<Integer> list = new ArrayList<>();
-//             for (int j = 0; j < size_of_rand; j++) {
-//                 list.add(random.nextInt(1000,10000));//adding a random number between 1000 and 10000 to the list
-//             }
-//             double timetaken = ActualProfiler(list);
-//             values.add(timetaken);
-//             System.out.println("The time taken by data set "+ i+" is: "+ timetaken+"ms");
-//             System.out.println();
+                //On Best case -> on an already sorted data set.
+                Collections.sort(dataSet);
+                dataSorter.dataSet = dataSet;
+                dataSorter.bubbleSort();
+                bubble_size_duration_map_best.put(i, dataSorter.time_taken); 
+    
+                //On Worst case -> reverese-sorted data set.
+                Collections.sort(dataSet, Collections.reverseOrder());
+                dataSorter.dataSet = dataSet;
+                dataSorter.bubbleSort();
+                bubble_size_duration_map_worst.put(i, dataSorter.time_taken); 
+            }
            
-//         }
-//         //Below we create the chart to visualize the growth rate
+            //---------------------------------------------------------------
+            //Code for testing the | insertion | sort algorithm in DataSorter
+            //---------------------------------------------------------------
+            {
+                dataSorter = new DataSorter(dataSetRandom);
+                
+                //On Average case -> jumbled data set.
+                dataSorter.insertionSort();
+                insertion_size_duration_map_average.put(i, dataSorter.time_taken); 
+                
+                //On Best case -> on an already sorted data set.
+                Collections.sort(dataSet);
+                dataSorter.dataSet = dataSet;
+                dataSorter.insertionSort();
+                insertion_size_duration_map_best.put(i, dataSorter.time_taken); 
+    
+                //On Worst case -> reverese-sorted data set.
+                Collections.sort(dataSet, Collections.reverseOrder());
+                dataSorter.dataSet = dataSet;
+                dataSorter.insertionSort();
+                insertion_size_duration_map_worst.put(i, dataSorter.time_taken); 
+            }
+        }
 
-//         XYSeries series = new XYSeries("Insertion sort");
-//         for (int i = 0; i < values.size(); i++) {
-//             series.add(i + 1, values.get(i));
-//         }
+        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         
-
-//         XYSeriesCollection dataset = new XYSeriesCollection();
-//         dataset.addSeries(series);
-
-//         JFreeChart chart = ChartFactory.createXYLineChart(
-//                 "Growth Rate of insertion sort",
-//                 "Datasets(Each iteration with a 1000 more elements than the last)",
-//                 "Time in ms",
-//                 dataset,
-//                 PlotOrientation.VERTICAL,
-//                 false,
-//                 true,
-//                 false
-//         );
-
-//         chart.setBackgroundPaint(Color.white);
-
-//         JFrame frame = new JFrame("Insertion Sort Algorithm growth rate");
-//         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//         frame.setPreferredSize(new Dimension(500, 270));
-//         frame.getContentPane().add(new ChartPanel(chart));
-//         frame.pack();
-//         frame.setVisible(true);
-
-      
+        //CODE FOR DISPLAYING RESULTS
         
-        
-//     }
+        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        //---------------------------------------------------------------
+        //Code for displaying the results of selection sort algorithm
+        //---------------------------------------------------------------
+         {
+            System.out.println("\n\nRESULTS ON THE SELECTION SORT ALGORITHM:");
+            
+            //On best case
+            System.out.println("\nFor best case:");
+            printHashMap(selection_size_duration_map_best);
+            //On average case
+            System.out.println("\nFor average case:");
+            printHashMap(selection_size_duration_map_average);
+            //On worst case
+            System.out.println("\nFor worst case:");
+            printHashMap(selection_size_duration_map_worst);
 
-// }
+        } 
+        //---------------------------------------------------------------
+        //Code for displaying the results of bubble sort algorithm
+        //---------------------------------------------------------------
+        
+        {
+           System.out.println("\n\nRESULTS ON THE BUBBLE SORT ALGORITHM:");
+           
+           //On best case
+           System.out.println("\nFor best case:");
+           printHashMap(bubble_size_duration_map_best);
+           //On average case
+           System.out.println("\nFor average case:");
+           printHashMap(bubble_size_duration_map_average);
+           //On worst case
+           System.out.println("\nFor worst case:");
+           printHashMap(bubble_size_duration_map_worst);
+
+        } 
+       
+        //---------------------------------------------------------------
+        //Code for displaying the results of insertion sort algorithm
+        //---------------------------------------------------------------
+        {
+           System.out.println("\n\nRESULTS ON THE INSERTION SORT ALGORITHM:");
+           
+           //On best case
+           System.out.println("\nFor best case:");
+           printHashMap(insertion_size_duration_map_best);
+           //On average case
+           System.out.println("\nFor average case:");
+           printHashMap(insertion_size_duration_map_average);
+           //On worst case
+           System.out.println("\nFor worst case:");
+           printHashMap(insertion_size_duration_map_worst);
+ 
+        } 
+    }
+
+    //A function that generates as many random numbers as needed.
+    public static ArrayList<Integer> dataSetGenerator(int quantity){
+        //Array list that will contain all the random numbers
+        ArrayList<Integer> to_be_returned = new ArrayList<Integer>();
+        
+        //Random number object for generating random numbers
+        Random random_number = new Random();
+        
+        //Add as many random numbers to the list as is specified by 'quantity'
+        for(int i=0; i<quantity; i++){
+            to_be_returned.add(random_number.nextInt(1000,100000));
+        }
+
+        return to_be_returned;
+    }
+
+    //A function that prints a hashmap.
+    public static void printHashMap(HashMap<Integer, Long> table){
+        System.out.println("[Data size, Time taken in microseconds]");
+
+        for(Map.Entry<Integer, Long> record : table.entrySet()){
+            int data_size = record.getKey();
+            long time_taken = record.getValue();
+
+            System.out.printf("[%d, %d]\n", data_size, time_taken);
+        }
+    }
+
+    //A function that prints an arraylist of type Integer. Used for testing purposes.
+    public static String printDataSet(ArrayList<Integer> dataSet){
+        String to_be_printed = "{";
+        int len = dataSet.size();
+        for(int i=0; i<len; i++){
+            to_be_printed += String.valueOf(dataSet.get(i));
+            
+            if(i != len-1) to_be_printed += ", ";
+        }
+        to_be_printed += "}";
+
+        return to_be_printed;
+    }
+}
