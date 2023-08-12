@@ -1,5 +1,6 @@
 package FinhasProgress.src;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import java.util.LinkedHashMap;
@@ -17,7 +18,7 @@ public class AlgorithmProfiler{
         long time_taken;
 
         public DataSorter(ArrayList<Integer> dataSet){
-            this.dataSet = dataSet;
+            this.dataSet = new ArrayList<Integer>(dataSet);
         }
     
         public void selectionSort(){
@@ -54,24 +55,26 @@ public class AlgorithmProfiler{
     
         public void bubbleSort(){
             long start_time = System.nanoTime();
-            boolean swapped = true;
+
             int size = dataSet.size();
-            int temp = 0;
-    
-            for (int i = 0; i < size - 1 && swapped; i++) {
-                for (int j = size - 1; j > i; j--) {
-                    swapped = false;
+            
+            for (int i = 0; i < size - 1; i++) {
+                boolean swapped = false;
+
+                for (int j = 0; j < size - 1 -i; j++) {
                     
-                    if (dataSet.get(j) < dataSet.get(j - 1)) {
-                        temp = dataSet.get(j);
-                        // dataSet.set(j, temp );
-                        dataSet.set(j, dataSet.get(j - 1));
-                        dataSet.set(j - 1, temp);
+                    if (dataSet.get(j) > dataSet.get(j + 1)) {
+                        Collections.swap(dataSet, j, j+1);
                         swapped = true;
                     }
+
                 }
+
+                if(!swapped)
+                    break;
             }
-    
+            
+            System.out.println(AlgorithmProfiler.printDataSet(dataSet));
             //Variable for holding the end time.
             long end_time = System.nanoTime();
             
@@ -137,7 +140,7 @@ public class AlgorithmProfiler{
         // Array list that will be modified for each case.
         ArrayList<Integer> dataSet;
 
-        for(int i=1000; i<=40000; i+=1000){
+        for(int i=10; i<=10; i+=1){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
@@ -170,6 +173,9 @@ public class AlgorithmProfiler{
             //---------------------------------------------------------------
             {
                 dataSorter = new DataSorter(dataSetRandom);
+
+                System.out.println("Bubble sort ");
+                System.out.println("Data: " + AlgorithmProfiler.printDataSet(dataSetRandom));
                 
                 //On Average case -> jumbled data set.
                 dataSorter.bubbleSort();
@@ -193,6 +199,9 @@ public class AlgorithmProfiler{
             //---------------------------------------------------------------
             {
                 dataSorter = new DataSorter(dataSetRandom);
+
+                System.out.println("Insertion sort ");
+                System.out.println("Data: " + AlgorithmProfiler.printDataSet(dataSetRandom));
                 
                 //On Average case -> jumbled data set.
                 dataSorter.insertionSort();
