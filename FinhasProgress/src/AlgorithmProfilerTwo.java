@@ -73,7 +73,6 @@ public class AlgorithmProfilerTwo{
                     break;
             }
             
-            System.out.println(AlgorithmProfiler.printDataSet(dataSet));
             //Variable for holding the end time.
             long end_time = System.nanoTime();
             
