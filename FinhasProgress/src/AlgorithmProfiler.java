@@ -2,7 +2,7 @@ package FinhasProgress.src;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class AlgorithmProfiler{
@@ -17,19 +17,19 @@ public class AlgorithmProfiler{
         //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
         // Hash maps to hold the problem size vs time duration mapping for the three cases in the selection sort algorithm.
-        HashMap<Integer, Long> selection_size_duration_map_best = new HashMap<>();
-        HashMap<Integer, Long> selection_size_duration_map_average = new HashMap<>();
-        HashMap<Integer, Long> selection_size_duration_map_worst = new HashMap<>();
+        LinkedHashMap<Integer, Long> selection_size_duration_map_best = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Long> selection_size_duration_map_average = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Long> selection_size_duration_map_worst = new LinkedHashMap<>();
         
         // Hash maps to hold the problem size vs time duration mapping for the three cases in the bubble sort algorithm.
-        HashMap<Integer, Long> bubble_size_duration_map_best = new HashMap<>();
-        HashMap<Integer, Long> bubble_size_duration_map_average = new HashMap<>();
-        HashMap<Integer, Long> bubble_size_duration_map_worst = new HashMap<>();
+        LinkedHashMap<Integer, Long> bubble_size_duration_map_best = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Long> bubble_size_duration_map_average = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Long> bubble_size_duration_map_worst = new LinkedHashMap<>();
 
         // Hash maps to hold the problem size vs time duration mapping for the three cases in the insertion sort algorithm.
-        HashMap<Integer, Long> insertion_size_duration_map_best = new HashMap<>();
-        HashMap<Integer, Long> insertion_size_duration_map_average = new HashMap<>();
-        HashMap<Integer, Long> insertion_size_duration_map_worst = new HashMap<>();
+        LinkedHashMap<Integer, Long> insertion_size_duration_map_best = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Long> insertion_size_duration_map_average = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Long> insertion_size_duration_map_worst = new LinkedHashMap<>();
         
         // Object for accessing all the sorting algorithms.
         DataSorter dataSorter;
@@ -39,7 +39,7 @@ public class AlgorithmProfiler{
         // Array list that will be modified for each case.
         ArrayList<Integer> dataSet;
 
-        for(int i=1000; i<=20000; i+=1000){
+        for(int i=1000; i<=40000; i+=1000){
 
             //Array list for holding the current randomly generated data set
             //to compare the three algorithms with the same data set.
@@ -68,7 +68,7 @@ public class AlgorithmProfiler{
                 dataSorter.selectionSort();
                 selection_size_duration_map_worst.put(i, dataSorter.time_taken); 
             }
-            
+            /* 
             //---------------------------------------------------------------
             //Code for testing the | bubble | sort algorithm in DataSorter
             //---------------------------------------------------------------
@@ -114,6 +114,7 @@ public class AlgorithmProfiler{
                 dataSorter.insertionSort();
                 insertion_size_duration_map_worst.put(i, dataSorter.time_taken); 
             }
+            */
         }
 
         //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -131,13 +132,13 @@ public class AlgorithmProfiler{
             
             //On best case
             System.out.println("\nFor best case:");
-            printHashMap(selection_size_duration_map_best);
+            printLinkedHashMap(selection_size_duration_map_best);
             //On average case
             System.out.println("\nFor average case:");
-            printHashMap(selection_size_duration_map_average);
+            printLinkedHashMap(selection_size_duration_map_average);
             //On worst case
             System.out.println("\nFor worst case:");
-            printHashMap(selection_size_duration_map_worst);
+            printLinkedHashMap(selection_size_duration_map_worst);
 
         } 
         //---------------------------------------------------------------
@@ -149,13 +150,13 @@ public class AlgorithmProfiler{
            
            //On best case
            System.out.println("\nFor best case:");
-           printHashMap(bubble_size_duration_map_best);
+           printLinkedHashMap(bubble_size_duration_map_best);
            //On average case
            System.out.println("\nFor average case:");
-           printHashMap(bubble_size_duration_map_average);
+           printLinkedHashMap(bubble_size_duration_map_average);
            //On worst case
            System.out.println("\nFor worst case:");
-           printHashMap(bubble_size_duration_map_worst);
+           printLinkedHashMap(bubble_size_duration_map_worst);
 
         } 
        
@@ -167,13 +168,13 @@ public class AlgorithmProfiler{
            
            //On best case
            System.out.println("\nFor best case:");
-           printHashMap(insertion_size_duration_map_best);
+           printLinkedHashMap(insertion_size_duration_map_best);
            //On average case
            System.out.println("\nFor average case:");
-           printHashMap(insertion_size_duration_map_average);
+           printLinkedHashMap(insertion_size_duration_map_average);
            //On worst case
            System.out.println("\nFor worst case:");
-           printHashMap(insertion_size_duration_map_worst);
+           printLinkedHashMap(insertion_size_duration_map_worst);
  
         } 
     }
@@ -194,10 +195,11 @@ public class AlgorithmProfiler{
         return to_be_returned;
     }
 
-    //A function that prints a hashmap.
-    public static void printHashMap(HashMap<Integer, Long> table){
+    //A function that prints a Linkedhashmap.
+    public static void printLinkedHashMap(LinkedHashMap<Integer, Long> table){
         System.out.println("[Data size, Time taken in microseconds]");
 
+        //With a for-each loop.
         for(Map.Entry<Integer, Long> record : table.entrySet()){
             int data_size = record.getKey();
             long time_taken = record.getValue();
